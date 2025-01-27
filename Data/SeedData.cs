@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CommunityApp.Data;
 
-    public static class SeedData // why is this static?
+    public static class SeedData
     {
             // this is an extension method to the ModelBuilder class
         public static void Seed(this ModelBuilder modelBuilder) {
