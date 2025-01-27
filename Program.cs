@@ -14,7 +14,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
-var app = builder.Build();
+var connStr = builder.Configuration.GetConnectionString("DefaultConnection") 
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(connStr));
+
+var app = builder.Build(); // ^^^^^^^^^^^^^^^ services above here ^^^^^^^^^^^^^^^
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
