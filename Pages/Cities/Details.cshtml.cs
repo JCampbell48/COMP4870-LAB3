@@ -27,8 +27,8 @@ namespace CommunityApp.Pages_Cities
             {
                 return NotFound();
             }
-
-            var city = await _context.Cities.FirstOrDefaultAsync(m => m.CityId == id);
+            // added Include method to include the Province to details page
+            var city = await _context.Cities!.Include(p => p.Province).FirstOrDefaultAsync(m => m.CityId == id);
 
             if (city is not null)
             {
